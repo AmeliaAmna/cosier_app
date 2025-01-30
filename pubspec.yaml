@@ -58,6 +58,23 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/images/cosier_3.jpg
+    - assets/images/cosier_11.jpg
+    - assets/images/cosier_12.jpg
+    - assets/images/cosier_13.jpg
+    - assets/images/cosier_14.jpg
+    - assets/images/cosier_15.jpg
+    - assets/images/cosier_23.png
+    - assets/images/cosier_45.jpeg
+    - assets/images/cosier_46.jpeg
+    - assets/images/cosier_47.jpeg
+    - assets/images/cosier_48.jpeg
+    - assets/images/cosier_49.jpg
+    - assets/images/cosier_50.jpg
+
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
