@@ -1,9 +1,8 @@
+import 'package:cosier/cart.dart'; 
+import 'package:cosier/profile.dart';
 import 'package:flutter/material.dart';
-import 'shop.dart'; // Ensure this exists
+import 'shop.dart'; 
 import 'login.dart';
-import 'signup.dart';
-import 'checkout.dart';
-
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -15,21 +14,21 @@ class NavDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.grey),
+            decoration: BoxDecoration(color: Color.fromARGB(182, 83, 56, 44)),
             child: Text(
-              'Menu',
-              style: TextStyle(fontSize: 24, color: Colors.white),
+              'COSIÉR',
+              style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.w500),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
+            leading: const Icon(Icons.home_filled), // Filled Home icon
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context); // Close drawer
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shopping_cart),
+            leading: const Icon(Icons.storefront), // Trendy Shop icon
             title: const Text('Shop'),
             onTap: () {
               Navigator.push(
@@ -39,8 +38,28 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            
-            title: const Text('Login'),
+            leading: const Icon(Icons.shopping_basket), // Trendy Cart icon with a basket
+            title: const Text('My Cart'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline), // Modern Outline Profile icon
+            title: const Text('My Profile'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.exit_to_app_rounded), // Rounded Logout icon
+            title: const Text('Logout'),
             onTap: () {
               Navigator.push(
                 context,
@@ -48,27 +67,6 @@ class NavDrawer extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            
-            title: const Text('Sign-up'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignUpPage()),
-              );
-            },
-          ),
-          ListTile(
-            
-            title: const Text('Check out '),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CheckoutPage()),
-              );
-            },
-          ),
-          
         ],
       ),
     );

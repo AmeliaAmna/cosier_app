@@ -5,16 +5,21 @@ class ShopPage extends StatelessWidget {
   final List<Map<String, String>> products = [
     {"name": "Scrunched Top", "price": "LKR 3,200", "image": "assets/images/cosier_15.jpg"},
     {"name": "COMFY Set", "price": "LKR 5,800", "image": "assets/images/cosier_12.jpg"},
-    {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_13.jpg"},
+    {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_33.jpg"},
     {"name": "Ruth Crop Tee", "price": "LKR 3,200", "image": "assets/images/cosier_14.jpg"},
     {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_11.jpg"},
     {"name": "Stella Tee", "price": "LKR 3,200", "image": "assets/images/cosier_3.jpg"},
+    {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_39.jpg"},
+    {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_13.jpg"},
   ];
 
   ShopPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width to decide the grid layout based on orientation
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("COSIER"),
@@ -24,11 +29,11 @@ class ShopPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: isPortrait ? 2 : 4,  // 2 items per row in portrait, 4 in landscape
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
-            childAspectRatio: 0.6,
+            childAspectRatio: 0.6, // Adjust the aspect ratio as needed for landscape
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {

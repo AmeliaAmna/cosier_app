@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'checkout.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -12,7 +13,7 @@ class _CartPageState extends State<CartPage> {
     {
       "name": "Long Sleeve Lia Top",
       "price": 3200,
-      "image": "assets/images/cosier_15.jpg",
+      "image": "assets/images/cosier_49.jpg",
       "quantity": 1,
       "size": "M",
     },
@@ -49,7 +50,7 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Checkout"),
+        title: const Text("CART"),
         leading: BackButton(onPressed: () => Navigator.pop(context)),
         centerTitle: true,
       ),
@@ -180,15 +181,18 @@ class _CartPageState extends State<CartPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle checkout
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("Checkout feature coming soon!")),
+                  // Navigate to CheckoutPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CheckoutPage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black87,
+                  backgroundColor: Colors.grey[800], // Dark grey color
                   foregroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, // Square corners
+                  ),
                 ),
                 child: const Text("Proceed to Checkout"),
               ),
@@ -199,3 +203,5 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
+
+

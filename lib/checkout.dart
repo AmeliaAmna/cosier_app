@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: CheckoutPage(),
   ));
@@ -143,14 +144,35 @@ class _CheckoutPageState extends State<CheckoutPage> {
         _paymentOption("Bank (Debit/Credit/Master)", "Bank"),
         _paymentOption("Cash", "Cash"),
 
-        const SizedBox(height: 20),
+        const SizedBox(height: 18),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Show a dialog confirming the order
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Order Placed'),
+                  content: const Text('Your order has been placed successfully!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => const HomePage()), // Replace with your home page widget
+                          (Route<dynamic> route) => false, // Remove all previous routes
+                        );
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
             style: ElevatedButton.styleFrom(
               minimumSize: Size(double.infinity, fieldHeight),
-              backgroundColor: const Color(0xFF616161), // Dark Gray Button
+              backgroundColor: const Color.fromARGB(255, 42, 42, 42), // Dark Gray Button
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             ),
             child: const Text("PAY NOW", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
@@ -214,3 +236,5 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 }
+
+
