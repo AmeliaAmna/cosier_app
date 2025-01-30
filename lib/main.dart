@@ -1,3 +1,4 @@
+import 'package:cosier/login.dart';
 import 'package:flutter/material.dart';
 import 'home.dart'; // Import HomeScreen widget
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.light(), // Default dark theme provided by Flutter
       themeMode: ThemeMode.system, // Switches between light and dark based on system theme
-      home: const HomeScreen(), // HomeScreen is the main widget
+      home: const LoginPage(), // HomeScreen is the main widget
     );
   }
 }

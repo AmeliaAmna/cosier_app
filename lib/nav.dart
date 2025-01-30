@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'shop.dart'; // Ensure this exists
-import 'product.dart';
 import 'login.dart';
 import 'signup.dart';
 import 'checkout.dart';
+
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -39,16 +39,6 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shopping_cart),
-            title: const Text('Product'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProductPage()),
-              );
-            },
-          ),
-          ListTile(
             
             title: const Text('Login'),
             onTap: () {
@@ -78,6 +68,7 @@ class NavDrawer extends StatelessWidget {
               );
             },
           ),
+          
         ],
       ),
     );

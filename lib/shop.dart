@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'product.dart';
 
 class ShopPage extends StatelessWidget {
   final List<Map<String, String>> products = [
@@ -9,6 +10,8 @@ class ShopPage extends StatelessWidget {
     {"name": "Mia Basic Tee", "price": "LKR 3,200", "image": "assets/images/cosier_11.jpg"},
     {"name": "Stella Tee", "price": "LKR 3,200", "image": "assets/images/cosier_3.jpg"},
   ];
+
+  ShopPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +32,32 @@ class ShopPage extends StatelessWidget {
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
-            return ProductCard(
-              name: products[index]["name"]!,
-              price: products[index]["price"]!,
-              image: products[index]["image"]!,
+            return GestureDetector(
+              onTap: () {
+                // Navigate with fade transition and Hero animation
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 500), // Animation duration
+                    pageBuilder: (context, animation, secondaryAnimation) => ProductPage(
+                      name: products[index]["name"]!,
+                      price: products[index]["price"]!,
+                      image: products[index]["image"]!,
+                    ),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation, // Fading effect
+                        child: child,
+                      );
+                    },
+                  ),
+                );
+              },
+              child: ProductCard(
+                name: products[index]["name"]!,
+                price: products[index]["price"]!,
+                image: products[index]["image"]!,
+              ),
             );
           },
         ),
@@ -41,12 +66,13 @@ class ShopPage extends StatelessWidget {
   }
 }
 
+/// Product card to display items in the grid
 class ProductCard extends StatelessWidget {
   final String name;
   final String price;
   final String image;
 
-  const ProductCard({required this.name, required this.price, required this.image});
+  const ProductCard({super.key, required this.name, required this.price, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +83,16 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported, size: 50), // ✅ Prevents crash if image is missing
+            child: Hero(
+              tag: image, // Hero animation tag for smooth transition
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported, size: 50),
+                ),
               ),
             ),
           ),

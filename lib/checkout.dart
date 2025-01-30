@@ -8,6 +8,8 @@ void main() {
 }
 
 class CheckoutPage extends StatefulWidget {
+  const CheckoutPage({super.key});
+
   @override
   _CheckoutPageState createState() => _CheckoutPageState();
 }
@@ -37,7 +39,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _productDetails(),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _checkoutForm(isPortrait: true),
         ],
       ),

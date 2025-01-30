@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final String name;
+  final String price;
+  final String image;
+
+  const ProductPage({super.key, required this.name, required this.price, required this.image});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  int quantity = 1; // Initial quantity
+  int quantity = 1;
 
-  // Method to increment quantity
   void _incrementQuantity() {
     setState(() {
       quantity++;
     });
   }
 
-  // Method to decrement quantity
   void _decrementQuantity() {
     if (quantity > 1) {
       setState(() {
@@ -30,18 +32,17 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Product Details"),
+        title: Text(widget.name),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Image Section
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                'assets/images/cosier_49.jpg', // Add your image asset here
+                widget.image,
                 height: 250,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) =>
@@ -49,43 +50,28 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Product Name
-            const Text(
-              'Stella Long Sleeve Tee',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(
+              widget.name,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
-
-            // Product Price
-            const Text(
-              'LKR 3,100',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.grey,
-              ),
+            Text(
+              widget.price,
+              style: const TextStyle(fontSize: 20, color: Colors.grey),
             ),
             const SizedBox(height: 16),
-
-            // Product Description
             const Text(
               'Description',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             const Text(
-              'A stylish long-sleeve high-neck T-shirt in a soft polyester-cotton blend, perfect for comfort and layering.',
+              'A stylish high-quality T-shirt perfect for comfort and layering.',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
 
-            // Size Selector
+             // Size Selector
             const Text(
               'Size',
               style: TextStyle(
@@ -100,8 +86,8 @@ class _ProductPageState extends State<ProductPage> {
                   .map((size) => Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: ChoiceChip(
-                          label: Text(size, style: TextStyle(color: Colors.white)),
-                          shape: RoundedRectangleBorder(
+                          label: Text(size, style: const TextStyle(color: Colors.white)),
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.zero, // Square corners
                           ),
                           selected: false,
@@ -162,7 +148,8 @@ class _ProductPageState extends State<ProductPage> {
             ),
             const SizedBox(height: 16),
 
-            // Action Buttons
+            
+            //Action Buttons
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -173,10 +160,10 @@ class _ProductPageState extends State<ProductPage> {
                     onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(const Color.fromARGB(236, 51, 51, 51)), // Grey background
+                          WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)), // Grey background
                       foregroundColor:
-                          MaterialStateProperty.all(Colors.white), // White text
-                      shape: MaterialStateProperty.all(
+                          WidgetStateProperty.all(Colors.white), // White text
+                      shape: WidgetStateProperty.all(
                         const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                       ),
                     ),
@@ -191,10 +178,10 @@ class _ProductPageState extends State<ProductPage> {
                     onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(const Color.fromARGB(236, 51, 51, 51)), // Grey background
+                          WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)), // Grey background
                       foregroundColor:
-                          MaterialStateProperty.all(Colors.white), // White text
-                      shape: MaterialStateProperty.all(
+                          WidgetStateProperty.all(Colors.white), // White text
+                      shape: WidgetStateProperty.all(
                         const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                       ),
                     ),

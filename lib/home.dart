@@ -1,72 +1,120 @@
 import 'package:flutter/material.dart';
 import 'nav.dart';
+import 'shop.dart';
+import 'cart.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Cosier")),
-      drawer: const NavDrawer(), // ✅ Navigation Drawer
+      appBar: AppBar(
+        title: const Text(
+          "COSIÉR",
+          style: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
+            letterSpacing: 1.5,
+          ),
+        ),
+        centerTitle: true,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              );
+            },
+          ),
+        ],
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 2,
+      ),
+      drawer: const NavDrawer(),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _heroSection(), // ✅ Top Banner
+            _heroSection(context),
             _sectionTitle("New Arrival"),
-            _newArrivalGrid(isPortrait: isPortrait), // ✅ Grid with products
-            _aboutSection(), // ✅ About Section
-            const Footer(), // ✅ Footer
+            _newArrivalGrid(context),
           ],
         ),
       ),
     );
   }
 
-  /// 🎯 **Hero Section (Top Banner)**
-  Widget _heroSection() {
+  Widget _heroSection(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
         Image.asset(
-          "assets/images/cosier_23.png", // Change to your image
+          "assets/images/cosier_23.png",
           width: double.infinity,
           height: 250,
           fit: BoxFit.cover,
         ),
         Positioned(
-          bottom: 20,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
+              backgroundColor:
+                  const Color.fromARGB(145, 114, 87, 59).withOpacity(0.6),
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 0,
             ),
-            onPressed: () {},
-            child: const Text("SHOP NOW"),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShopPage()),
+              );
+            },
+            child: const Text(
+              "SHOP NOW",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
           ),
         ),
       ],
     );
   }
 
-  /// 🎯 **New Arrival Section**
-  Widget _newArrivalGrid({required bool isPortrait}) {
+  Widget _newArrivalGrid(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    int getCrossAxisCount() {
+      if (screenWidth >= 1200) return 5;
+      if (screenWidth >= 800) return 4;
+      if (screenWidth >= 600) return 3;
+      return 2;
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isPortrait ? 2 : 4, // ✅ Portrait: 2, Landscape: 4
-          childAspectRatio: 0.7, // ✅ Keep aspect ratio for product images
+          crossAxisCount: getCrossAxisCount(),
+          childAspectRatio: 0.7,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
-        itemCount: 4, // Only showing 4 items
+        itemCount: 8,
         itemBuilder: (context, index) {
           return _productCard(index);
         },
@@ -74,13 +122,28 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  /// 🎯 **Product Card**
   Widget _productCard(int index) {
     List<Map<String, String>> products = [
-      {"image": "assets/images/cosier_3.jpg", "name": "Scrunched Top", "price": "LKR 3,200"},
-      {"image": "assets/images/cosier_15.jpg", "name": "COMFY Set", "price": "LKR 5,800"},
-      {"image": "assets/images/cosier_14.jpg", "name": "Mia Basic Tee", "price": "LKR 2,300"},
-      {"image": "assets/images/cosier_13.jpg", "name": "Ruth Crop Tee", "price": "LKR 3,200"},
+      {
+        "image": "assets/images/cosier_49.jpg",
+        "name": "Scrunched Top",
+        "price": "LKR 3,200"
+      },
+      {
+        "image": "assets/images/cosier_3.jpg",
+        "name": "COMFY Set",
+        "price": "LKR 5,800"
+      },
+      {
+        "image": "assets/images/cosier_14.jpg",
+        "name": "Mia Basic Tee",
+        "price": "LKR 2,300"
+      },
+      {
+        "image": "assets/images/cosier_15.jpg",
+        "name": "Ruth Crop Tee",
+        "price": "LKR 3,200"
+      },
     ];
 
     return Card(
@@ -91,7 +154,7 @@ class HomeScreen extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.asset(
-              products[index]["image"]!,
+              products[index % products.length]["image"]!,
               width: double.infinity,
               height: 140,
               fit: BoxFit.cover,
@@ -102,9 +165,12 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(products[index]["name"]!, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text(products[index % products.length]["name"]!,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
-                Text(products[index]["price"]!, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                Text(products[index % products.length]["price"]!,
+                    style: const TextStyle(fontSize: 14, color: Colors.grey)),
               ],
             ),
           ),
@@ -113,66 +179,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  /// 🎯 **About Section**
-  Widget _aboutSection() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _sectionTitle("ABOUT COSIÈR"),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  "Welcome to Cosier, your trusted destination for timeless and comfortable women's fashion..."
-                  "\n\nExplore our curated selection today to find the perfect pieces that suit your lifestyle and needs.",
-                  style: const TextStyle(fontSize: 14, color: Colors.black87),
-                ),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                flex: 1,
-                child: Image.asset(
-                  "assets/images/cosier_50.jpg",
-                  width: 100,
-                  height: 150,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 🎯 **Section Title**
   Widget _sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-    );
-  }
-}
-
-/// 🎯 **Footer Widget**
-class Footer extends StatelessWidget {
-  const Footer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey.shade900,
-      padding: const EdgeInsets.all(20),
-      child: const Column(
-        children: [
-          Text("© 2024 Cosier. All Rights Reserved.", style: TextStyle(color: Colors.white, fontSize: 14)),
-          SizedBox(height: 5),
-          Text("Privacy Policy | Terms & Conditions", style: TextStyle(color: Colors.white54, fontSize: 12)),
-        ],
-      ),
+      child: Text(title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
     );
   }
 }
