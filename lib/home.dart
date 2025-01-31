@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
 import 'nav.dart';
 import 'shop.dart';
-import 'cart.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Scaffold structure with AppBar, Drawer, and body content
     return Scaffold(
-      appBar: const CustomAppBar(),  // ✅ Using reusable AppBar
-      drawer: const NavDrawer(),
-      body: SingleChildScrollView(
+      appBar: const CustomAppBar(),  // Reusable AppBar for consistency across the app
+      drawer: const NavDrawer(),  // Navigation Drawer for easy app navigation
+      body: SingleChildScrollView(  // Allows scrolling when content overflows
         child: Column(
           children: [
-            _heroSection(context),
-            _sectionTitle("New Arrival"),
-            _newArrivalGrid(context),
+            _heroSection(context),  // Hero section with a banner and "Shop Now" button
+            _sectionTitle("New Arrival"),  // Section title for "New Arrival"
+            _newArrivalGrid(context),  // Grid of new arrival products
           ],
         ),
       ),
     );
   }
 
+  // Hero section with an image and a button that leads to the Shop page
   Widget _heroSection(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
+        // Background image for the hero section
         Image.asset(
           "assets/images/cosier_23.png",
           width: double.infinity,
@@ -36,8 +38,7 @@ class HomePage extends StatelessWidget {
         Positioned(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  const Color.fromARGB(145, 114, 87, 59).withOpacity(0.6),
+              backgroundColor: const Color.fromARGB(145, 114, 87, 59).withOpacity(0.6),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               shape: RoundedRectangleBorder(
@@ -45,6 +46,7 @@ class HomePage extends StatelessWidget {
               ),
               elevation: 0,
             ),
+            // Navigate to ShopPage when button is pressed
             onPressed: () {
               Navigator.push(
                 context,
@@ -61,9 +63,11 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // Grid displaying the new arrival products
   Widget _newArrivalGrid(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    // Determines the number of columns based on screen width
     int getCrossAxisCount() {
       if (screenWidth >= 1200) return 5;
       if (screenWidth >= 800) return 4;
@@ -74,23 +78,25 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,  // Makes the GridView take only the necessary space
+        physics: const NeverScrollableScrollPhysics(),  // Disables scrolling within the GridView
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: getCrossAxisCount(),
-          childAspectRatio: 0.7,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+          crossAxisCount: getCrossAxisCount(),  // Dynamic column count
+          childAspectRatio: 0.7,  // Aspect ratio for each grid item
+          crossAxisSpacing: 10,  // Spacing between columns
+          mainAxisSpacing: 10,  // Spacing between rows
         ),
-        itemCount: 8,
+        itemCount: 8,  // Number of products to display
         itemBuilder: (context, index) {
-          return _productCard(index);
+          return _productCard(index);  // Card for each product
         },
       ),
     );
   }
 
+  // Creates a product card for each item in the grid
   Widget _productCard(int index) {
+    // List of product details
     List<Map<String, String>> products = [
       {
         "image": "assets/images/cosier_49.jpg",
@@ -114,11 +120,13 @@ class HomePage extends StatelessWidget {
       },
     ];
 
+    // Card widget to display product information
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Displaying the product image with rounded corners
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.asset(
@@ -133,10 +141,12 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Product name displayed in bold text
                 Text(products[index % products.length]["name"]!,
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
+                // Product price displayed in a lighter color
                 Text(products[index % products.length]["price"]!,
                     style: const TextStyle(fontSize: 14, color: Colors.grey)),
               ],
@@ -147,6 +157,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // Section title widget used for "New Arrival"
   Widget _sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.all(16.0),

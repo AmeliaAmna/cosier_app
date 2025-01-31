@@ -9,6 +9,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  // List of cart items, each containing product details
   List<Map<String, dynamic>> cartItems = [
     {
       "name": "Long Sleeve Lia Top",
@@ -19,12 +20,14 @@ class _CartPageState extends State<CartPage> {
     },
   ];
 
+  // Increment quantity of the item in the cart
   void _incrementQuantity(int index) {
     setState(() {
       cartItems[index]["quantity"]++;
     });
   }
 
+  // Decrement quantity of the item in the cart
   void _decrementQuantity(int index) {
     if (cartItems[index]["quantity"] > 1) {
       setState(() {
@@ -33,6 +36,7 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
+  // Remove product from the cart
   void _removeProduct(int index) {
     setState(() {
       cartItems.removeAt(index);
@@ -41,11 +45,12 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate subtotal, shipping fee, and total price
     int subtotal = cartItems.fold<int>(
       0,
       (sum, item) => sum + (item["price"] as int) * (item["quantity"] as int),
     );
-    int shippingFee = 300;
+    int shippingFee = 300;  // Fixed shipping fee
     int total = subtotal + shippingFee;
 
     return Scaffold(
@@ -58,6 +63,7 @@ class _CartPageState extends State<CartPage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
+            // Display cart items if any are present
             if (cartItems.isNotEmpty)
               ...cartItems.map((item) {
                 int index = cartItems.indexOf(item);
@@ -70,6 +76,7 @@ class _CartPageState extends State<CartPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
+                        // Display product image with fallback on error
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
@@ -86,15 +93,18 @@ class _CartPageState extends State<CartPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Display product name
                               Text(item["name"],
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(height: 4),
+                              // Display product size
                               Text("Size: ${item["size"]}",
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.grey)),
                               const SizedBox(height: 8),
+                              // Row for incrementing and decrementing quantity
                               Row(
                                 children: [
                                   GestureDetector(
@@ -133,9 +143,11 @@ class _CartPageState extends State<CartPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
+                            // Display total price for the current item
                             Text("LKR ${item["price"] * item["quantity"]}",
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold)),
+                            // Button to remove the item from cart
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red),
                               onPressed: () => _removeProduct(index),
@@ -149,6 +161,7 @@ class _CartPageState extends State<CartPage> {
               }),
             const Divider(),
             const SizedBox(height: 16),
+            // Subtotal and shipping fee rows
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -165,6 +178,7 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
             const Divider(),
+            // Total price row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -177,6 +191,7 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
             const SizedBox(height: 24),
+            // Button to proceed to checkout
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -203,5 +218,3 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
-
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home.dart'; // Import the Home page
-import 'signup.dart'; // Import the Sign Up page (to be created)
+import 'home.dart'; 
+import 'signup.dart'; 
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Controllers to capture user input
+  // Controllers to capture user input for email and password
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -19,9 +19,9 @@ class _LoginPageState extends State<LoginPage> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    // Simple validation to check if fields are not empty
+    // Validate that both fields are not empty
     if (email.isNotEmpty && password.isNotEmpty) {
-      // Navigate to home page on successful login
+      // Navigate to the home page on successful login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
@@ -44,9 +44,9 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Login page header
+              // Header text for the login page
               const Text(
-                "LOGIN TO YOUR ACCOUNT",
+                "LOGIN TO YOUR COSIÉR ACCOUNT",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
@@ -91,11 +91,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 12),
 
-              // Login button
+              // Login button to trigger the login function
               SizedBox(
                 height: 44,
                 child: ElevatedButton(
-                  onPressed: _login, // Trigger login function
+                  onPressed: _login, // Calls _login function
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[800], // Set background color
                     shape: const RoundedRectangleBorder(),
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 12),
 
-              // Link to create a new account (Navigate to SignUpPage)
+              // Link to navigate to the SignUp page for account creation
               TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -124,4 +124,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}   
+}

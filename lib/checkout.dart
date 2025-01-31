@@ -3,8 +3,8 @@ import 'home.dart';
 
 void main() {
   runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: CheckoutPage(),
+    debugShowCheckedModeBanner: false, // Disables the debug banner on top of the app
+    home: CheckoutPage(), // Sets the CheckoutPage as the home page
   ));
 }
 
@@ -16,57 +16,59 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
+  // Default payment method is set to "Bank"
   String paymentMethod = "Bank";
 
   @override
   Widget build(BuildContext context) {
+    // Determine if the device is in portrait or landscape mode
     bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Checkout")),
+      appBar: AppBar(title: const Text("Checkout")), // Title of the app bar
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0), // Adds padding around the content
           child: isPortrait ? _portraitLayout() : _landscapeLayout(),
         ),
       ),
     );
   }
 
-  /// Portrait Mode Layout: Product Details on Top, Checkout Form Below (Scrollable)
+  // Layout for portrait mode: Product details on top and checkout form below, both scrollable
   Widget _portraitLayout() {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _productDetails(),
+          _productDetails(), // Display product details
           const SizedBox(height: 20),
-          _checkoutForm(isPortrait: true),
+          _checkoutForm(isPortrait: true), // Display the checkout form
         ],
       ),
     );
   }
 
-  /// Landscape Mode Layout: Left Side Scrollable Checkout Form, Right Side Fixed Product Details
+  // Layout for landscape mode: Checkout form on the left (scrollable) and product details on the right (fixed)
   Widget _landscapeLayout() {
     return Row(
       children: [
         Expanded(
           flex: 2,
           child: SingleChildScrollView(
-            child: _checkoutForm(isPortrait: false),
+            child: _checkoutForm(isPortrait: false), // Scrollable checkout form
           ),
         ),
         const SizedBox(width: 20),
         Expanded(
           flex: 1,
-          child: _productDetails(),
+          child: _productDetails(), // Fixed product details
         ),
       ],
     );
   }
 
-  /// Product Details Section (Fixed in Landscape Mode)
+  // Widget for displaying the product details section
   Widget _productDetails() {
     return Card(
       elevation: 3,
@@ -81,7 +83,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
-                    "assets/images/cosier_49.jpg",
+                    "assets/images/cosier_49.jpg", // Product image
                     width: 80,
                     height: 80,
                     fit: BoxFit.cover,
@@ -97,29 +99,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ],
                   ),
                 ),
-                const Text("3,200", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text("3,200", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)), // Product price
               ],
             ),
             const Divider(),
             _summaryRow("Subtotal", "3,200"),
             _summaryRow("Shipping Fee", "300"),
             const Divider(thickness: 1.5),
-            _summaryRow("TOTAL", "3,500", isBold: true),
+            _summaryRow("TOTAL", "3,500", isBold: true), // Total price
           ],
         ),
       ),
     );
   }
 
-  /// Checkout Form Section (Field Height Adjusted for Landscape Mode)
+  // Widget for displaying the checkout form section
   Widget _checkoutForm({required bool isPortrait}) {
-    double fieldHeight = isPortrait ? 55 : 45;
+    double fieldHeight = isPortrait ? 55 : 45; // Adjust field height for portrait and landscape
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _sectionTitle("Contact"),
-        _customTextField("Email", fieldHeight),
+        _customTextField("Email", fieldHeight), // Email field
 
         _sectionTitle("Delivery"),
         Row(
@@ -141,15 +143,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
         _customTextField("Phone", fieldHeight),
 
         _sectionTitle("Payment"),
-        _paymentOption("Bank (Debit/Credit/Master)", "Bank"),
-        _paymentOption("Cash", "Cash"),
+        _paymentOption("Bank (Debit/Credit/Master)", "Bank"), // Payment option for Bank
+        _paymentOption("Cash", "Cash"), // Payment option for Cash
 
         const SizedBox(height: 18),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              // Show a dialog confirming the order
+              // Show a confirmation dialog when the order is placed
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -160,7 +162,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       onPressed: () {
                         Navigator.of(context).pop(); // Close the dialog
                         Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const HomePage()), // Replace with your home page widget
+                          MaterialPageRoute(builder: (context) => const HomePage()), // Redirect to home page
                           (Route<dynamic> route) => false, // Remove all previous routes
                         );
                       },
@@ -182,7 +184,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  /// Custom Text Input Field
+  // Widget for creating a custom text input field
   Widget _customTextField(String label, double height) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -199,7 +201,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  /// Section Title (Bold Heading)
+  // Widget for displaying section titles (like "Contact", "Delivery")
   Widget _sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -207,22 +209,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  /// Payment Option Selection (Radio Buttons)
+  // Widget for displaying payment options (Radio buttons)
   Widget _paymentOption(String title, String value) {
     return RadioListTile(
       title: Text(title),
       value: value,
-      groupValue: paymentMethod,
+      groupValue: paymentMethod, // Tracks the selected payment method
       activeColor: const Color(0xFF424242), // Dark Gray Selection
       onChanged: (newValue) {
         setState(() {
-          paymentMethod = newValue.toString();
+          paymentMethod = newValue.toString(); // Updates the selected payment method
         });
       },
     );
   }
 
-  /// Summary Row (Subtotal, Shipping Fee, Total)
+  // Widget for displaying summary rows like subtotal, shipping fee, total
   Widget _summaryRow(String label, String amount, {bool isBold = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -236,5 +238,3 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 }
-
-
