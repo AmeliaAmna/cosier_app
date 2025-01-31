@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'checkout.dart';
 
 class ProductPage extends StatefulWidget {
   final String name;
   final String price;
   final String image;
 
-  const ProductPage({super.key, required this.name, required this.price, required this.image});
+  const ProductPage(
+      {super.key,
+      required this.name,
+      required this.price,
+      required this.image});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -30,7 +35,8 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: AppBar(
@@ -62,17 +68,20 @@ class _ProductPageState extends State<ProductPage> {
                       children: [
                         Text(
                           widget.name,
-                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           widget.price,
-                          style: const TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              const TextStyle(fontSize: 20, color: Colors.grey),
                         ),
                         const SizedBox(height: 16),
                         const Text(
                           'Description',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         const Text(
@@ -96,14 +105,18 @@ class _ProductPageState extends State<ProductPage> {
                               .map((size) => Padding(
                                     padding: const EdgeInsets.only(right: 8),
                                     child: ChoiceChip(
-                                      label: Text(size, style: const TextStyle(color: Colors.white)),
+                                      label: Text(size,
+                                          style: const TextStyle(
+                                              color: Colors.white)),
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.zero,
                                       ),
                                       selected: false,
                                       onSelected: (bool selected) {},
-                                      selectedColor: const Color.fromARGB(255, 39, 39, 39),
-                                      backgroundColor: const Color.fromARGB(236, 51, 51, 51),
+                                      selectedColor:
+                                          const Color.fromARGB(255, 39, 39, 39),
+                                      backgroundColor:
+                                          const Color.fromARGB(236, 51, 51, 51),
                                       side: BorderSide.none,
                                     ),
                                   ))
@@ -125,19 +138,23 @@ class _ProductPageState extends State<ProductPage> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey, width: 1),
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
                               ),
                               child: Row(
                                 children: [
                                   GestureDetector(
                                     onTap: _decrementQuantity,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                                      child: const Icon(Icons.remove, color: Colors.black),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 12),
+                                      child: const Icon(Icons.remove,
+                                          color: Colors.black),
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
                                     child: Text(
                                       '$quantity',
                                       style: const TextStyle(fontSize: 16),
@@ -146,8 +163,10 @@ class _ProductPageState extends State<ProductPage> {
                                   GestureDetector(
                                     onTap: _incrementQuantity,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                                      child: const Icon(Icons.add, color: Colors.black),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 12),
+                                      child: const Icon(Icons.add,
+                                          color: Colors.black),
                                     ),
                                   ),
                                 ],
@@ -166,10 +185,13 @@ class _ProductPageState extends State<ProductPage> {
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)),
-                                  foregroundColor: WidgetStateProperty.all(Colors.white),
+                                  backgroundColor: WidgetStateProperty.all(
+                                      const Color.fromARGB(236, 51, 51, 51)),
+                                  foregroundColor:
+                                      WidgetStateProperty.all(Colors.white),
                                   shape: WidgetStateProperty.all(
-                                    const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                    const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero),
                                   ),
                                 ),
                                 child: const Text("Add to Cart"),
@@ -181,10 +203,13 @@ class _ProductPageState extends State<ProductPage> {
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)),
-                                  foregroundColor: WidgetStateProperty.all(Colors.white),
+                                  backgroundColor: WidgetStateProperty.all(
+                                      const Color.fromARGB(236, 51, 51, 51)),
+                                  foregroundColor:
+                                      WidgetStateProperty.all(Colors.white),
                                   shape: WidgetStateProperty.all(
-                                    const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                    const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero),
                                   ),
                                 ),
                                 child: const Text("Buy Now"),
@@ -212,7 +237,8 @@ class _ProductPageState extends State<ProductPage> {
                   const SizedBox(height: 16),
                   Text(
                     widget.name,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -246,14 +272,18 @@ class _ProductPageState extends State<ProductPage> {
                         .map((size) => Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: ChoiceChip(
-                                label: Text(size, style: const TextStyle(color: Colors.white)),
+                                label: Text(size,
+                                    style:
+                                        const TextStyle(color: Colors.white)),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.zero,
                                 ),
                                 selected: false,
                                 onSelected: (bool selected) {},
-                                selectedColor: const Color.fromARGB(255, 39, 39, 39),
-                                backgroundColor: const Color.fromARGB(236, 51, 51, 51),
+                                selectedColor:
+                                    const Color.fromARGB(255, 39, 39, 39),
+                                backgroundColor:
+                                    const Color.fromARGB(236, 51, 51, 51),
                                 side: BorderSide.none,
                               ),
                             ))
@@ -282,12 +312,15 @@ class _ProductPageState extends State<ProductPage> {
                             GestureDetector(
                               onTap: _decrementQuantity,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                                child: const Icon(Icons.remove, color: Colors.black),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
+                                child: const Icon(Icons.remove,
+                                    color: Colors.black),
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 12),
                               child: Text(
                                 '$quantity',
                                 style: const TextStyle(fontSize: 16),
@@ -296,8 +329,10 @@ class _ProductPageState extends State<ProductPage> {
                             GestureDetector(
                               onTap: _incrementQuantity,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                                child: const Icon(Icons.add, color: Colors.black),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
+                                child:
+                                    const Icon(Icons.add, color: Colors.black),
                               ),
                             ),
                           ],
@@ -314,12 +349,30 @@ class _ProductPageState extends State<ProductPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Show a snack bar with a sticker
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Row(
+                                  children: [
+                                    const Text(
+                                        "Product successfully added to cart 🛒✨!"),
+                                    const SizedBox(width: 8),
+                                  ],
+                                ),
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: Color.fromARGB(255, 74, 70, 70), 
+                              ),
+                            );
+                          },
                           style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)),
-                            foregroundColor: WidgetStateProperty.all(Colors.white),
-                            shape: WidgetStateProperty.all(
-                              const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                            backgroundColor: MaterialStateProperty.all(
+                                const Color.fromARGB(236, 51, 51, 51)),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
                             ),
                           ),
                           child: const Text("Add to Cart"),
@@ -329,12 +382,22 @@ class _ProductPageState extends State<ProductPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigate to the checkout page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const CheckoutPage()),
+                            );
+                          },
                           style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(const Color.fromARGB(236, 51, 51, 51)),
-                            foregroundColor: WidgetStateProperty.all(Colors.white),
-                            shape: WidgetStateProperty.all(
-                              const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                            backgroundColor: MaterialStateProperty.all(
+                                const Color.fromARGB(236, 51, 51, 51)),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero),
                             ),
                           ),
                           child: const Text("Buy Now"),

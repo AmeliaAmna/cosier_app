@@ -31,10 +31,10 @@ class SignUpPage extends StatelessWidget {
                 height: 44,
                 child: TextField(
                   controller: firstNameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "First Name",
-                    labelStyle: const TextStyle(fontSize: 12),
-                    border: const OutlineInputBorder(
+                    labelStyle: TextStyle(fontSize: 12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
@@ -46,10 +46,10 @@ class SignUpPage extends StatelessWidget {
                 height: 44,
                 child: TextField(
                   controller: lastNameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Last Name",
-                    labelStyle: const TextStyle(fontSize: 12),
-                    border: const OutlineInputBorder(
+                    labelStyle: TextStyle(fontSize: 12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
@@ -61,10 +61,10 @@ class SignUpPage extends StatelessWidget {
                 height: 44,
                 child: TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Email",
-                    labelStyle: const TextStyle(fontSize: 12),
-                    border: const OutlineInputBorder(
+                    labelStyle: TextStyle(fontSize: 12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
@@ -77,10 +77,10 @@ class SignUpPage extends StatelessWidget {
                 child: TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Password",
-                    labelStyle: const TextStyle(fontSize: 12),
-                    border: const OutlineInputBorder(
+                    labelStyle: TextStyle(fontSize: 12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
@@ -101,15 +101,15 @@ class SignUpPage extends StatelessWidget {
                       // Navigate to HomePage
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => const HomePage()),
                       );
                     } else {
                       // You can add an error message or validation
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            content: const Text('Please fill all the fields'),
+                          return const AlertDialog(
+                            content: Text('Please fill all the fields'),
                           );
                         },
                       );

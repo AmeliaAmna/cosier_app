@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +23,10 @@ class ProfilePage extends StatelessWidget {
                   backgroundImage: NetworkImage(
                       'https://via.placeholder.com/150'), // Dummy image
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Jane Doe',
                       style: TextStyle(
@@ -75,10 +77,10 @@ class ProfileRowItem extends StatelessWidget {
   final String value;
 
   const ProfileRowItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

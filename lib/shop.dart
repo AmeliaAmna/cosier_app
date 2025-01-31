@@ -22,7 +22,7 @@ class ShopPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("COSIER"),
+        title: const Text("COSIÉR SHOP"),
         centerTitle: true,
         actions: [IconButton(icon: const Icon(Icons.shopping_bag), onPressed: () {})],
       ),

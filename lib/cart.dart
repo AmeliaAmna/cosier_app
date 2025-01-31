@@ -146,7 +146,7 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                 );
-              }).toList(),
+              }),
             const Divider(),
             const SizedBox(height: 16),
             Row(

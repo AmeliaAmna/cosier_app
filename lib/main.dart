@@ -1,6 +1,6 @@
+import 'package:cosier/theme.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +14,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Cosier App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.light(primary: Colors.grey.shade900),
-        useMaterial3: true, // Enable Material 3 for the app
-      ),
-      darkTheme: ThemeData.light(), // Default dark theme provided by Flutter
-      themeMode: ThemeMode.system, // Switches between light and dark based on system theme
-      home: const LoginPage(), // HomeScreen is the main widget
+      theme: lightMode,  // Force Light Mode
+      darkTheme: darkMode,  
+      themeMode: ThemeMode.light, // Force Light Mode
+      home: const LoginPage(),
     );
   }
 }
+
+
+
 
 
 // import 'package:flutter/material.dart';
