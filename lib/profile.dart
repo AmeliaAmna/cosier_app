@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get the current theme
-    final isDarkMode = theme.brightness == Brightness.dark; // Check if it's dark mode
-    final textColor = isDarkMode ? Colors.white : Colors.black; // Use white in dark mode
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
+    // Choose a color that works well for both light and dark modes
+    final backgroundColor = isDarkMode ? Colors.grey[900] : Colors.grey[50];
+    final cardColor = isDarkMode ? Colors.grey[800] : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.background, // Set background color based on the theme
+      backgroundColor: backgroundColor, // Set background color based on theme
       appBar: AppBar(
-        backgroundColor: theme.appBarTheme.backgroundColor ?? const Color.fromARGB(255, 255, 255, 255), // Set the AppBar color
+        backgroundColor: backgroundColor, // Set AppBar color to match background
         title: const Text(
           'Profile',
           style: TextStyle(color: Colors.black), // Title text color
@@ -21,7 +24,7 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: SingleChildScrollView(  // Add SingleChildScrollView for scrollable content
+      body: SingleChildScrollView( // Add SingleChildScrollView for scrollable content
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -32,7 +35,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/login.jpg'), // Use your asset image here
+                    backgroundImage: AssetImage('assets/images/login.jpg'), // Your asset image here
                   ),
                   const SizedBox(width: 16),
                   Column(
@@ -41,12 +44,15 @@ class ProfilePage extends StatelessWidget {
                       Text(
                         'Amelia Amna',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold, color: textColor), // Set text color
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: textColor, // Set text color based on theme
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Colombo, Sri Lanka',
-                        style: TextStyle(color: textColor), // Set text color
+                        style: TextStyle(color: textColor), // Set text color based on theme
                       ),
                     ],
                   ),
@@ -57,10 +63,10 @@ class ProfilePage extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: theme.cardColor, // Set card background color based on theme
+                  color: cardColor, // Set card background color based on theme
                   boxShadow: [
                     BoxShadow(
-                      color: theme.shadowColor.withOpacity(0.2), // Adjust shadow color based on theme
+                      color: Colors.black.withOpacity(0.1), // Adjust shadow color
                       spreadRadius: 2,
                       blurRadius: 8,
                     ),
@@ -74,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),            
+              const SizedBox(height: 32),
             ],
           ),
         ),
@@ -95,9 +101,9 @@ class ProfileRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get current theme
-    final isDarkMode = theme.brightness == Brightness.dark; // Check if it's dark mode
-    final textColor = isDarkMode ? Colors.white : Colors.black; // Use white in dark mode
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+    final textColor = isDarkMode ? Colors.white : Colors.black; // Set text color based on theme
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -106,12 +112,12 @@ class ProfileRowItem extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(color: textColor), // Set text color
+            style: TextStyle(color: textColor), // Set text color based on theme
           ),
           Text(
             value,
             style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 16, color: textColor), // Set text color
+                fontWeight: FontWeight.w600, fontSize: 16, color: textColor), // Set text color based on theme
           ),
         ],
       ),
