@@ -172,7 +172,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             },
             style: ElevatedButton.styleFrom(
               minimumSize: Size(double.infinity, fieldHeight),
-              backgroundColor: const Color.fromARGB(255, 42, 42, 42), // Dark Gray Button
+              backgroundColor: const Color.fromARGB(255, 60, 60, 60), // Dark Gray Button
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             ),
             child: const Text("PAY NOW", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),

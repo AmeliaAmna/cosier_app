@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'login.dart'; // Import the login page
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Define controllers for each text field
     final TextEditingController firstNameController = TextEditingController();
     final TextEditingController lastNameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
@@ -26,7 +26,6 @@ class SignUpPage extends StatelessWidget {
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              // First Name Field
               SizedBox(
                 height: 44,
                 child: TextField(
@@ -41,7 +40,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Last Name Field
               SizedBox(
                 height: 44,
                 child: TextField(
@@ -56,7 +54,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Email Field
               SizedBox(
                 height: 44,
                 child: TextField(
@@ -71,7 +68,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Password Field
               SizedBox(
                 height: 44,
                 child: TextField(
@@ -87,24 +83,19 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Sign Up Button
               SizedBox(
                 height: 44,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Add logic to navigate to the home page
-                    // Example: Push to home page when form is filled
                     if (firstNameController.text.isNotEmpty &&
                         lastNameController.text.isNotEmpty &&
                         emailController.text.isNotEmpty &&
                         passwordController.text.isNotEmpty) {
-                      // Navigate to HomePage
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => const HomePage()),
                       );
                     } else {
-                      // You can add an error message or validation
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -128,10 +119,13 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Login Text Button
               TextButton(
                 onPressed: () {
-                  // Optionally, navigate to the login page
+                  // Navigate to the LoginPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
                 },
                 child: const Text("OR LOGIN", style: TextStyle(fontSize: 12)),
               ),
@@ -142,5 +136,3 @@ class SignUpPage extends StatelessWidget {
     );
   }
 }
-
-

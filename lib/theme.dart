@@ -15,13 +15,13 @@ ThemeData lightMode = ThemeData(
 
 ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: Colors.blue,
-  scaffoldBackgroundColor: Colors.grey[900], // Hardcoded Dark Background
+  primaryColor: const Color.fromARGB(255, 15, 78, 130),
+  scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37), // Hardcoded Dark Background
   colorScheme: ColorScheme.dark(
     brightness: Brightness.dark,
-    primary: Colors.blue,
+    primary: const Color.fromARGB(255, 13, 85, 144),
     onPrimary: Colors.white,
-    surface: Colors.grey[900]!, // Ensure background is grey
+    surface: const Color.fromARGB(255, 57, 57, 57)!, // Ensure background is grey
     onSurface: Colors.white,
   ),
-);
+);  

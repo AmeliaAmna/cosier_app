@@ -355,22 +355,22 @@ class _ProductPageState extends State<ProductPage> {
                               const SnackBar(
                                 content: Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                         "Product successfully added to cart 🛒✨!"),
-                                    const SizedBox(width: 8),
+                                    SizedBox(width: 8),
                                   ],
                                 ),
-                                duration: const Duration(seconds: 2),
+                                duration: Duration(seconds: 2),
                                 backgroundColor: Color.fromARGB(255, 74, 70, 70), 
                               ),
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromARGB(236, 51, 51, 51)),
+                            backgroundColor: WidgetStateProperty.all(
+                                const Color.fromARGB(235, 64, 64, 64)),
                             foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(Colors.white),
+                            shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.zero),
                             ),
@@ -391,11 +391,11 @@ class _ProductPageState extends State<ProductPage> {
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromARGB(236, 51, 51, 51)),
+                            backgroundColor: WidgetStateProperty.all(
+                                const Color.fromARGB(235, 62, 62, 62)),
                             foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(
+                                WidgetStateProperty.all(Colors.white),
+                            shape: WidgetStateProperty.all(
                               const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.zero),
                             ),

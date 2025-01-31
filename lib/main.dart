@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Cosier App',
-      theme: lightMode,  // Force Light Mode
-      darkTheme: darkMode,  
-      themeMode: ThemeMode.light, // Force Light Mode
+      theme: lightMode, // Light theme
+      darkTheme: darkMode, // Dark theme
+      themeMode: ThemeMode.system, // Respond to system settings
       home: const LoginPage(),
     );
   }
